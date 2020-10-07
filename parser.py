@@ -19,24 +19,25 @@ dataset = []
 # final_dataset = np.array(dataset)
 # print(final_dataset.shape)
 
-def get_vector(sequence_1, sequence_2):
+def get_vector(sequence_1):
 	sequence_vector_1 = np.zeros(shape = (1,100))
 	for i in range(len(sequence_1)-2):
 		word = sequence_1[i:i+3]
 		vector = protein_dict[protein_dict['words'] == word].to_numpy()
 		sequence_vector_1 = sequence_vector_1+np.delete(vector, 0, axis = 1)
 	sequence_vector_1 = np.squeeze(sequence_vector_1, axis = 0)
-	sequence_vector_2 = np.zeros(shape = (1,100))
-	for i in range(len(sequence_2)-2):
-		word = sequence_2[i:i+3]
-		vector = protein_dict[protein_dict['words'] == word].to_numpy()
-		sequence_vector_2 = sequence_vector_2+np.delete(vector, 0, axis = 1)
-	sequence_vector_2 = np.squeeze(sequence_vector_2, axis = 0)
-	final_sequence = np.add(sequence_vector_1, sequence_vector_2)
-	return final_sequence
-
+	# sequence_vector_2 = np.zeros(shape = (1,100))
+	# for i in range(len(sequence_2)-2):
+	# 	word = sequence_2[i:i+3]
+	# 	vector = protein_dict[protein_dict['words'] == word].to_numpy()
+	# 	sequence_vector_2 = sequence_vector_2+np.delete(vector, 0, axis = 1)
+	# sequence_vector_2 = np.squeeze(sequence_vector_2, axis = 0)
+	# final_sequence = np.add(sequence_vector_1, sequence_vector_2)
+	# return final_sequence
+	return sequence_vector_1
 
 def final_dataset(sample = 'positive'):
+	k = 1
 	path = ''
 	if sample == "positive":
 		path = './dataset/'
@@ -63,9 +64,13 @@ def final_dataset(sample = 'positive'):
 					viral_protein = record_dict[keys].seq
 				else:
 					human_protein.append(record_dict[keys].seq)
+		viral_sequence = get_vector(viral_protein)
 		for protein in human_protein:
-			features = get_vector(viral_protein, protein)
+			human_sequence = get_vector(protein)
+			features = np.add(viral_sequence, human_sequence)
 			dataset.append(features)
+		print(k)
+		k += 1
 	dataset = np.vstack(dataset)
 	return dataset
 
