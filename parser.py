@@ -97,12 +97,16 @@ def final_dataset(sample = 'positive'):
 # print(len(negative_viral_proteins))
 
 #generate datasets
-positive_samples = final_dataset(sample = 'positive')
-negative_samples = final_dataset(sample = 'negative')
-print(positive_samples.shape)
-print(negative_samples.shape)
 
+# print(len(os.listdir('./Dataset_Negative/')))
+
+
+positive_samples = final_dataset(sample = 'positive')
 np.save('positive_samples', positive_samples)
+print(positive_samples.shape)
 print("positive samples done!!")
+
+negative_samples = final_dataset(sample = 'negative')
+print(negative_samples.shape)
 np.save('negative_samples', negative_samples)
 print("negative samples done!!")
