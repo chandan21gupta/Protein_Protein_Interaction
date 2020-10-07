@@ -96,3 +96,6 @@ positive_samples = final_dataset(sample = 'positive')
 negative_samples = final_dataset(sample = 'negative')
 print(positive_samples.shape)
 print(negative_samples.shape)
+
+np.save('positive_samples', positive_samples)
+np.save('negative_samples', negative_samples)
