@@ -98,4 +98,6 @@ print(positive_samples.shape)
 print(negative_samples.shape)
 
 np.save('positive_samples', positive_samples)
+print("positive samples done!!")
 np.save('negative_samples', negative_samples)
+print("negative samples done!!")
