@@ -9,7 +9,7 @@ from sklearn.model_selection import train_test_split
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-def generate_train_test_data(split = 0.3, random_state = 42, scaling = 'normal_negative', sampling = True, show_plots = True):
+def generate_train_test_data(split = 0.3, random_state = 42, scaling = 'standard', sampling = True, show_plots = True):
 
 	'''
 	This method generates the training and test data. 
@@ -22,14 +22,16 @@ def generate_train_test_data(split = 0.3, random_state = 42, scaling = 'normal_n
 				  show_plots : Boolean - To show target variable distribution after each sampling method.											
 	'''
 
-	data = pd.read_csv('final_dataset.csv', index_col = [0])
+	data = pd.read_csv('../extracted_datasets/raw.csv', index_col = [0])
 
 	X = data[data.columns[0:100]]
 
 	y = data['y']
+    
+	if show_plots == True:
 
-	sns.countplot(y).set_title('Target Distribution in whole dataset')
-	plt.show()
+		sns.countplot(y).set_title('Target Distribution in whole dataset')
+		plt.show()
 
 	X_train, X_test, y_train, y_test = train_test_split(X, y, random_state = random_state, stratify = y, test_size = split)
 
