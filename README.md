@@ -9,6 +9,7 @@ This repository contains directories.
           Results - confusion matrices, roc curve and metrics for all the models
           Train_Test_Data - datasets stored after feature selection
           models - optimal models stored for each algorithm.
+          mlp_layers - t-SNE plots for the features of individual layers of the trained MLP layers
 5) src - contains latest source files used to train and test the models. These should be run to generate the results.
 
 The documentation for each function made can be found in its definition in the file itself.
